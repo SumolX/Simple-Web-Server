@@ -86,15 +86,14 @@ namespace SimpleWeb {
             }
         };
         
-        std::unordered_map<std::string, std::unordered_map<std::string, 
-            std::function<void(typename ServerBase<socket_type>::Response&, std::shared_ptr<typename ServerBase<socket_type>::Request>)> > >  resource;
+        typedef std::function<void(typename ServerBase<socket_type>::Response&, std::shared_ptr<typename ServerBase<socket_type>::Request>)> Resource;
         
-        std::unordered_map<std::string, 
-            std::function<void(typename ServerBase<socket_type>::Response&, std::shared_ptr<typename ServerBase<socket_type>::Request>)> > default_resource;
+        std::unordered_map<std::string, std::unordered_map<std::string, Resource> >  resource;
+        
+        std::unordered_map<std::string, Resource> default_resource;
 
     private:
-        std::vector<std::pair<std::string, std::vector<std::pair<boost::regex,
-            std::function<void(typename ServerBase<socket_type>::Response&, std::shared_ptr<typename ServerBase<socket_type>::Request>)> > > > > opt_resource;
+        std::vector<std::pair<std::string, std::vector<std::pair<boost::regex, Resource> > > > opt_resource;
         
     public:
         void start() {
