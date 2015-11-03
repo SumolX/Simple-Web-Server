@@ -283,8 +283,7 @@ namespace SimpleWeb {
             }
         }
         
-        void write_response(std::shared_ptr<socket_type> socket, std::shared_ptr<Request> request, 
-                std::function<void(typename ServerBase<socket_type>::Response&, std::shared_ptr<typename ServerBase<socket_type>::Request>)>& resource_function) {
+        void write_response(std::shared_ptr<socket_type> socket, std::shared_ptr<Request> request, Resource& resource_function) {
             //Set timeout on the following boost::asio::async-read or write function
             std::shared_ptr<boost::asio::deadline_timer> timer;
             if(timeout_content>0)
